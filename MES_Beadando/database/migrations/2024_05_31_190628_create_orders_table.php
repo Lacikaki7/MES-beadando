@@ -15,6 +15,7 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('product_id')->constrained();
+            $table->foreignId('customer_id')->constrained();
             $table->integer('quantity');
             $table->enum('status', ['pending', 'in_production', 'completed', 'shipped', 'delivered', 'declined'])
                 ->default('pending');

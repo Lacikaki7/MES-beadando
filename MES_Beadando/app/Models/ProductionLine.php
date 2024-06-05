@@ -10,7 +10,7 @@ class ProductionLine extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'location', 'current_task'
+        'name', 'location', 'is_avaible', 'current_task'
     ];
 
     protected $casts = [

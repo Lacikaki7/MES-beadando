@@ -13,7 +13,7 @@ class ProductionLinePolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->hasRole(['Admin', 'Costumer', 'Production']);
+        return $user->hasRole(['Admin', 'Production', 'Customer']);
     }
 
     /**
@@ -21,7 +21,7 @@ class ProductionLinePolicy
      */
     public function view(User $user, ProductionLine $productionLine): bool
     {
-        return $user->hasRole(['Admin', 'Costumer', 'Production']);
+        return $user->hasRole(['Admin', 'Production', 'Customer']);
     }
 
     /**
@@ -29,7 +29,7 @@ class ProductionLinePolicy
      */
     public function create(User $user): bool
     {
-        return $user->hasRole(['Admin', 'Production']);
+        return $user->hasPermissionTo('Create Production Lines');
     }
 
     /**
@@ -37,7 +37,7 @@ class ProductionLinePolicy
      */
     public function update(User $user, ProductionLine $productionLine): bool
     {
-        return $user->hasRole(['Admin','Production']);
+        return $user->hasPermissionTo('Edit Production Lines');
     }
 
     /**
@@ -45,7 +45,7 @@ class ProductionLinePolicy
      */
     public function delete(User $user, ProductionLine $productionLine): bool
     {
-        return $user->hasRole(['Admin']);
+        return $user->hasPermissionTo('Delete Production Lines');
     }
 
     /**

@@ -13,7 +13,7 @@ class ProductPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->hasRole(['Admin', 'Costumer', 'Production']);
+        return $user->hasRole(['Admin', 'Customer', 'Production']);
     }
 
     /**
@@ -21,7 +21,7 @@ class ProductPolicy
      */
     public function view(User $user, Product $product): bool
     {
-        return $user->hasRole(['Admin', 'Costumer', 'Production']);
+        return $user->hasRole(['Admin', 'Customer', 'Production']);
     }
 
     /**
@@ -29,7 +29,7 @@ class ProductPolicy
      */
     public function create(User $user): bool
     {
-        return $user->hasRole(['Admin']);
+        return $user->hasPermissionTo('Create Products');
     }
 
     /**
@@ -37,7 +37,7 @@ class ProductPolicy
      */
     public function update(User $user, Product $product): bool
     {
-        return $user->hasRole(['Admin', 'Production']);
+        return $user->hasPermissionTo('Create Products');
     }
 
     /**
@@ -45,7 +45,7 @@ class ProductPolicy
      */
     public function delete(User $user, Product $product): bool
     {
-        return $user->hasRole(['Admin']);
+        return $user->hasPermissionTo('Create Products');
     }
 
     /**

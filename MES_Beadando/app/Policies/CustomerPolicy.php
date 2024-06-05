@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\Order;
+use App\Models\Customer;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
-class OrderPolicy
+class CustomerPolicy
 {
     /**
      * Determine whether the user can view any models.
@@ -19,7 +19,7 @@ class OrderPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Order $order): bool
+    public function view(User $user, Customer $customer): bool
     {
         return $user->hasRole(['Admin', 'Customer', 'Production']);
     }
@@ -29,29 +29,29 @@ class OrderPolicy
      */
     public function create(User $user): bool
     {
-        return $user->hasPermissionTo('Create Orders');
+        return $user->hasPermissionTo('Create Shipments');
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Order $order): bool
+    public function update(User $user, Customer $customer): bool
     {
-        return $user->hasPermissionTo('Edit Orders');
+        return $user->hasPermissionTo('Create Shipments');
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Order $order): bool
+    public function delete(User $user, Customer $customer): bool
     {
-        return $user->hasPermissionTo('Delete Orders');
+        return $user->hasPermissionTo('Create Shipments');
     }
 
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Order $order): bool
+    public function restore(User $user, Customer $customer): bool
     {
         return $user->hasRole(['Admin']);
     }
@@ -59,7 +59,7 @@ class OrderPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Order $order): bool
+    public function forceDelete(User $user, Customer $customer): bool
     {
         return $user->hasRole(['Admin']);
     }

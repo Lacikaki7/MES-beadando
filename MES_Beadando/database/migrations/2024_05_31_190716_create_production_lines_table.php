@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('location');
+            $table->boolean('is_avaible')->default(false);
             $table->json('current_task')->nullable();
             $table->timestamps();
         });

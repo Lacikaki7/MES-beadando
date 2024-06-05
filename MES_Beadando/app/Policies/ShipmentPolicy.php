@@ -13,7 +13,7 @@ class ShipmentPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->hasRole(['Admin', 'Costumer', 'Production']);
+        return $user->hasRole(['Admin', 'Customer', 'Production']);
     }
 
     /**
@@ -21,7 +21,7 @@ class ShipmentPolicy
      */
     public function view(User $user, Shipment $shipment): bool
     {
-        return $user->hasRole(['Admin', 'Costumer', 'Production']);
+        return $user->hasRole(['Admin', 'Customer', 'Production']);
     }
 
     /**
@@ -29,7 +29,7 @@ class ShipmentPolicy
      */
     public function create(User $user): bool
     {
-        return $user->hasRole(['Admin', 'Production']);
+        return $user->hasPermissionTo('Create Shipments');
     }
 
     /**
@@ -37,7 +37,7 @@ class ShipmentPolicy
      */
     public function update(User $user, Shipment $shipment): bool
     {
-        return $user->hasRole(['Admin', 'Production']);
+        return $user->hasPermissionTo('Create Shipments');
     }
 
     /**
@@ -45,7 +45,7 @@ class ShipmentPolicy
      */
     public function delete(User $user, Shipment $shipment): bool
     {
-        return $user->hasRole(['Admin']);
+        return $user->hasPermissionTo('Create Shipments');
     }
 
     /**

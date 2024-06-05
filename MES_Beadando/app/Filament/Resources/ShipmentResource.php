@@ -21,7 +21,7 @@ use Filament\Forms\Components\Section;
 class ShipmentResource extends Resource
 {
     protected static ?string $model = Shipment::class;
-    protected static ?string $navigationGroup = 'MES';
+    protected static ?string $navigationGroup = 'Production management';
 
     protected static ?string $navigationIcon = 'heroicon-o-truck';
 
@@ -42,7 +42,9 @@ class ShipmentResource extends Resource
                 'in transit' => 'in transit',
                 'delivered' => 'delivered',
                 'returned' => 'returned',
-            ])->required(),
+            ])
+            ->required()
+            ->default('pending'),
             ])->columns(2)
         ]);
     }
@@ -58,11 +60,28 @@ class ShipmentResource extends Resource
                 TextColumn::make('updated_at')->dateTime(),
             ])
             ->filters([
-                //
+                Tables\Filters\SelectFilter::make('status')
+                ->label('Status')
+                ->options([
+                    'pending' => 'Pending',
+                    'in_production' => 'In Production',
+                    'completed' => 'Completed',
+                    'shipped' => 'Shipped',
+                    'delivered' => 'Delivered',
+                    'declined' => 'Declined',
+                ])
+                ->query(function (Builder $query, array $data) {
+                    if ($status = $data['value'] ?? null) {
+                        $query->where('status', $status);
+                    }
+                })
             ])
             ->actions([
+                Tables\Actions\ActionGroup::make([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
+                ]),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

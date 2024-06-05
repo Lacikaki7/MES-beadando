@@ -10,7 +10,7 @@ class Product extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'status', 'current_location', 'target_location', 'estimated_completion_time', 'history'
+        'name', 'status', 'price', 'current_location', 'target_location', 'estimated_completion_time', 'history'
     ];
 
     protected $casts = [
